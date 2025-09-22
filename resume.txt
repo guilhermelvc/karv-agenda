@@ -1,0 +1,84 @@
+npm install react@18 react-dom@18 caso precise corrigir algum erro de dependencia
+
+## Primeiro passo no prompt comando ##
+
+npx create-next-app@15.3.2 karv
+√ Would you like to use TypeScript? ... No / Yes
+√ Would you like to use ESLint? ... No / Yes
+√ Would you like to use Tailwind CSS? ... No / Yes
+√ Would you like your code inside a `src/` directory? ... No / Yes
+√ Would you like to use App Router? (recommended) ... No / Yes
+√ Would you like to use Turbopack for `next dev`? ... No / Yes
+√ Would you like to customize the import alias (`@/*` by default)? ... No / Yes
+Creating a new Next.js app in C:\Users\Guilherme\Desktop\karv.
+
+Using npm.
+
+Initializing project with template: app-tw
+
+
+Installing dependencies:
+- react
+- react-dom
+- next
+
+Installing devDependencies:
+- typescript
+- @types/node
+- @types/react
+- @types/react-dom
+- @tailwindcss/postcss
+- tailwindcss
+- eslint
+- eslint-config-next
+- @eslint/eslintrc
+
+______________________________________________________________________________________________
+
+## Segundo passo no terminal ##
+
+npm run dev
+
+> karv@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.3.2
+   - Local:        http://localhost:3000
+   - Network:      http://172.19.16.1:3000
+
+______________________________________________________________________________________________
+
+## Plugin para organizar as classname formatando "
+
+npm i -D prettier-plugin-tailwindcss@0.6.11 prettier@3.5.3
+
+criar um arquivo .prettierrc.json 
+{
+    "plugins": ["prettier-plugin-tailwindcss"]
+}
+
+npm i eslint-plugin-simple-import-sort@12.1.1 -D
+
+______________________________________________________________________________________________
+
+## Banco de Dados Drizzle ORM Postrgls 
+
+Neon - Criar projeto, diminuir o processamento e conectar criando o arquivo .env
+DATABASE_URL="psql 'postgresql://neondb_owner:npg_Mvz4QKiOoA7j@ep-wild-flower-aclz2dsf-pooler.sa-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'"
+
+drizzle com postgresql
+npm i drizzle-orm@0.43.1 pg@8.15.6
+npm i -D drizzle-kit@0.31.1
+
+npx drizzle-kit push - para criar ou atualizar o banco de Dados
+npx drizzle-kit studio - para abrir o studio e visualizar os dados do banco
+
+
+______________________________________________________________________________________________
+
+## Biblioteca de componentes
+
+npx shadcn@2.5.0 init
+
+
+
