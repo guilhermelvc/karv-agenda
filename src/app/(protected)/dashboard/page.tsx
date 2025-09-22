@@ -36,12 +36,21 @@ const DashboardPage = async ({ searchParams }: DashboardPageProps) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+
+  // 🔹 Se não tiver clínica, redireciona para configuração
+  if (!session?.user?.clinic) {
+    redirect("/clinic-form");
+  }
+
   const { from, to } = await searchParams;
   if (!from || !to) {
     redirect(
-      `/dashboard?from=${dayjs().format("YYYY-MM-DD")}&to=${dayjs().add(1, "month").format("YYYY-MM-DD")}`,
+      `/dashboard?from=${dayjs().format("YYYY-MM-DD")}&to=${dayjs()
+        .add(1, "month")
+        .format("YYYY-MM-DD")}`,
     );
   }
+
   const {
     totalRevenue,
     totalAppointments,
@@ -57,7 +66,7 @@ const DashboardPage = async ({ searchParams }: DashboardPageProps) => {
     session: {
       user: {
         clinic: {
-          id: session!.user.clinic!.id,
+          id: session.user.clinic.id, // 🔹 aqui já é seguro acessar
         },
       },
     },

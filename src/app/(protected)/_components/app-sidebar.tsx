@@ -45,8 +45,8 @@ const items = [
     icon: CalendarDays,
   },
   {
-    title: "Médicos",
-    url: "/doctors",
+    title: "Profissionais",
+    url: "/professionals",
     icon: Stethoscope,
   },
   {
@@ -73,7 +73,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="border-b p-4">
-        <Image src="/logo.svg" alt="Doutor Agenda" width={136} height={28} />
+        <Image src="/logo.svg" alt="Karv Agenda" width={136} height={28} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>

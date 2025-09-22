@@ -15,7 +15,7 @@ const AddProfessionalButton = () => {
       <DialogTrigger asChild>
         <Button>
           <Plus />
-          Adicionar médico
+          Adicionar profissional
         </Button>
       </DialogTrigger>
       <UpsertProfessionalForm
