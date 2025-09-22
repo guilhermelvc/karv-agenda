@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const upsertDoctorSchema = z
+export const upsertProfessionalSchema = z
   .object({
     id: z.string().uuid().optional(),
     name: z.string().trim().min(1, {
@@ -32,4 +32,4 @@ export const upsertDoctorSchema = z
     },
   );
 
-export type UpsertDoctorSchema = z.infer<typeof upsertDoctorSchema>;
+export type UpsertProfessionalSchema = z.infer<typeof upsertProfessionalSchema>;

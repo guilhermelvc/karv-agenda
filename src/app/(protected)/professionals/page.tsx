@@ -11,19 +11,19 @@ import {
   PageTitle,
 } from "@/components/ui/page-container";
 import { db } from "@/db";
-import { doctorsTable } from "@/db/schema";
+import { professionalsTable } from "@/db/schema";
 import WithAuthentication from "@/hocs/with-authentication";
 import { auth } from "@/lib/auth";
 
-import AddDoctorButton from "./_components/add-doctor-button";
-import DoctorCard from "./_components/doctor-card";
+import AddProfessionalButton from "./_components/add-professional-button";
+import ProfessionalCard from "./_components/professional-card";
 
-const DoctorsPage = async () => {
+const ProfessionalsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-  const doctors = await db.query.doctorsTable.findMany({
-    where: eq(doctorsTable.clinicId, session!.user.clinic!.id),
+  const professionals = await db.query.professionalsTable.findMany({
+    where: eq(professionalsTable.clinicId, session!.user.clinic!.id),
   });
   return (
     <WithAuthentication mustHaveClinic mustHavePlan>
@@ -36,13 +36,16 @@ const DoctorsPage = async () => {
             </PageDescription>
           </PageHeaderContent>
           <PageActions>
-            <AddDoctorButton />
+            <AddProfessionalButton />
           </PageActions>
         </PageHeader>
         <PageContent>
           <div className="grid grid-cols-3 gap-6">
-            {doctors.map((doctor) => (
-              <DoctorCard key={doctor.id} doctor={doctor} />
+            {professionals.map((professional) => (
+              <ProfessionalCard
+                key={professional.id}
+                professional={professional}
+              />
             ))}
           </div>
         </PageContent>
@@ -51,4 +54,4 @@ const DoctorsPage = async () => {
   );
 };
 
-export default DoctorsPage;
+export default ProfessionalsPage;

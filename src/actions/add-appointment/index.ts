@@ -14,7 +14,7 @@ export const addAppointment = protectedWithClinicActionClient
   .schema(addAppointmentSchema)
   .action(async ({ parsedInput, ctx }) => {
     const availableTimes = await getAvailableTimes({
-      doctorId: parsedInput.doctorId,
+      professionalId: parsedInput.professionalId,
       date: dayjs(parsedInput.date).format("YYYY-MM-DD"),
     });
     if (!availableTimes?.data) {

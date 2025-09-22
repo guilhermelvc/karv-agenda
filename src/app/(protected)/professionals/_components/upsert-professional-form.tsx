@@ -6,7 +6,7 @@ import { NumericFormat } from "react-number-format";
 import { toast } from "sonner";
 import { z } from "zod";
 
-import { upsertDoctor } from "@/actions/upsert-doctor";
+import { upsertProfessional } from "@/actions/upsert-professional";
 import { Button } from "@/components/ui/button";
 import {
   DialogContent,
@@ -33,7 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { doctorsTable } from "@/db/schema";
+import { professionalsTable } from "@/db/schema";
 
 import { medicalSpecialties } from "../_constants";
 
@@ -68,50 +68,52 @@ const formSchema = z
     },
   );
 
-interface UpsertDoctorFormProps {
+interface UpsertProfessionalFormProps {
   isOpen: boolean;
-  doctor?: typeof doctorsTable.$inferSelect;
+  professional?: typeof professionalsTable.$inferSelect;
   onSuccess?: () => void;
 }
 
-const UpsertDoctorForm = ({
-  doctor,
+const UpsertProfessionalForm = ({
+  professional,
   onSuccess,
   isOpen,
-}: UpsertDoctorFormProps) => {
+}: UpsertProfessionalFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     shouldUnregister: true,
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: doctor?.name ?? "",
-      specialty: doctor?.specialty ?? "",
-      appointmentPrice: doctor?.appointmentPriceInCents
-        ? doctor.appointmentPriceInCents / 100
+      name: professional?.name ?? "",
+      specialty: professional?.specialty ?? "",
+      appointmentPrice: professional?.appointmentPriceInCents
+        ? professional.appointmentPriceInCents / 100
         : 0,
-      availableFromWeekDay: doctor?.availableFromWeekDay?.toString() ?? "1",
-      availableToWeekDay: doctor?.availableToWeekDay?.toString() ?? "5",
-      availableFromTime: doctor?.availableFromTime ?? "",
-      availableToTime: doctor?.availableToTime ?? "",
+      availableFromWeekDay:
+        professional?.availableFromWeekDay?.toString() ?? "1",
+      availableToWeekDay: professional?.availableToWeekDay?.toString() ?? "5",
+      availableFromTime: professional?.availableFromTime ?? "",
+      availableToTime: professional?.availableToTime ?? "",
     },
   });
 
   useEffect(() => {
     if (isOpen) {
       form.reset({
-        name: doctor?.name ?? "",
-        specialty: doctor?.specialty ?? "",
-        appointmentPrice: doctor?.appointmentPriceInCents
-          ? doctor.appointmentPriceInCents / 100
+        name: professional?.name ?? "",
+        specialty: professional?.specialty ?? "",
+        appointmentPrice: professional?.appointmentPriceInCents
+          ? professional.appointmentPriceInCents / 100
           : 0,
-        availableFromWeekDay: doctor?.availableFromWeekDay?.toString() ?? "1",
-        availableToWeekDay: doctor?.availableToWeekDay?.toString() ?? "5",
-        availableFromTime: doctor?.availableFromTime ?? "",
-        availableToTime: doctor?.availableToTime ?? "",
+        availableFromWeekDay:
+          professional?.availableFromWeekDay?.toString() ?? "1",
+        availableToWeekDay: professional?.availableToWeekDay?.toString() ?? "5",
+        availableFromTime: professional?.availableFromTime ?? "",
+        availableToTime: professional?.availableToTime ?? "",
       });
     }
-  }, [isOpen, form, doctor]);
+  }, [isOpen, form, professional]);
 
-  const upsertDoctorAction = useAction(upsertDoctor, {
+  const upsertProfessionalAction = useAction(upsertProfessional, {
     onSuccess: () => {
       toast.success("Médico adicionado com sucesso.");
       onSuccess?.();
@@ -122,9 +124,9 @@ const UpsertDoctorForm = ({
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    upsertDoctorAction.execute({
+    upsertProfessionalAction.execute({
       ...values,
-      id: doctor?.id,
+      id: professional?.id,
       availableFromWeekDay: parseInt(values.availableFromWeekDay),
       availableToWeekDay: parseInt(values.availableToWeekDay),
       appointmentPriceInCents: values.appointmentPrice * 100,
@@ -134,9 +136,11 @@ const UpsertDoctorForm = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{doctor ? doctor.name : "Adicionar médico"}</DialogTitle>
+        <DialogTitle>
+          {professional ? professional.name : "Adicionar médico"}
+        </DialogTitle>
         <DialogDescription>
-          {doctor
+          {professional
             ? "Edite as informações desse médico."
             : "Adicione um novo médico."}
         </DialogDescription>
@@ -404,10 +408,10 @@ const UpsertDoctorForm = ({
             )}
           />
           <DialogFooter>
-            <Button type="submit" disabled={upsertDoctorAction.isPending}>
-              {upsertDoctorAction.isPending
+            <Button type="submit" disabled={upsertProfessionalAction.isPending}>
+              {upsertProfessionalAction.isPending
                 ? "Salvando..."
-                : doctor
+                : professional
                   ? "Salvar"
                   : "Adicionar"}
             </Button>
@@ -418,4 +422,4 @@ const UpsertDoctorForm = ({
   );
 };
 
-export default UpsertDoctorForm;
+export default UpsertProfessionalForm;
