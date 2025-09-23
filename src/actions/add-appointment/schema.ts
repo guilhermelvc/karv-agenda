@@ -14,6 +14,6 @@ export const addAppointmentSchema = z.object({
     message: "Horário é obrigatório.",
   }),
   appointmentPriceInCents: z.number().min(1, {
-    message: "Valor da consulta é obrigatório.",
+    message: "Valor do serviço é obrigatório.",
   }),
 });

@@ -26,7 +26,7 @@ export const getAvailableTimes = protectedWithClinicActionClient
       where: eq(professionalsTable.id, parsedInput.professionalId),
     });
     if (!professional) {
-      throw new Error("Médico não encontrado");
+      throw new Error("Profissional não encontrado");
     }
     const selectedDayOfWeek = dayjs(parsedInput.date).day();
     const professionalIsAvailable =

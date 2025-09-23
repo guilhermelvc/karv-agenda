@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/select";
 import { professionalsTable } from "@/db/schema";
 
-import { medicalSpecialties } from "../_constants";
+import { professionalSpecialties } from "../_constants";
 
 const formSchema = z
   .object({
@@ -46,7 +46,7 @@ const formSchema = z
       message: "Especialidade é obrigatória.",
     }),
     appointmentPrice: z.number().min(1, {
-      message: "Preço da consulta é obrigatório.",
+      message: "Preço do serviço é obrigatório.",
     }),
     availableFromWeekDay: z.string(),
     availableToWeekDay: z.string(),
@@ -176,7 +176,7 @@ const UpsertProfessionalForm = ({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    {medicalSpecialties.map((specialty) => (
+                    {professionalSpecialties.map((specialty) => (
                       <SelectItem key={specialty.value} value={specialty.value}>
                         {specialty.label}
                       </SelectItem>

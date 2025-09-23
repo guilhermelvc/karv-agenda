@@ -5,7 +5,7 @@ import {
   Gem,
   LayoutDashboard,
   LogOut,
-  Stethoscope,
+  UserSquare,
   UsersRound,
 } from "lucide-react";
 import Image from "next/image";
@@ -47,7 +47,7 @@ const items = [
   {
     title: "Profissionais",
     url: "/professionals",
-    icon: Stethoscope,
+    icon: UserSquare,
   },
   {
     title: "Pacientes",
